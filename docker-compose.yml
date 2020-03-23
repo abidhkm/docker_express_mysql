@@ -1,0 +1,25 @@
+version: '3'
+
+services: 
+    db:
+        build: ./db
+        environment: 
+            MYSQL_DATABASE: stormlight
+            MYSQL_ROOT_PASSWORD: supersecret
+            MYSQL_USER: mysql
+            MYSQL_PASSWORD: supersecret
+            DATABASE_HOST: db
+    web:
+        build: ./web
+        environment: 
+            MYSQL_DATABASE: stormlight
+            MYSQL_ROOT_PASSWORD: supersecret
+            MYSQL_USER: mysql
+            MYSQL_PASSWORD: supersecret
+            MySQL_PORT: 3306
+            DATABASE_HOST: db
+        ports: 
+            - "3000:3000"
+        depends_on: 
+            - db
+        restart:  on-failure
